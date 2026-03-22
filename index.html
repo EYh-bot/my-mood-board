@@ -2,22 +2,22 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <!-- 移动端必备：正确缩放 + 刘海屏安全区（iPhone） -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f0f1f6">
-  <title>My Mood Board</title>
+  <meta name="theme-color" content="#0F1923">
+  <title>战术情绪板 · VALORANT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f5f5f7;
-      --card: #ffffff;
-      --text: #1d1d1f;
-      --text-secondary: #86868b;
-      --accent: #0071e3;
-      --accent-hover: #0077ed;
-      --radius: 18px;
-      --shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
-      --shadow-focus: 0 4px 24px rgba(0, 113, 227, 0.12);
-      --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --bg: #0f1923;
+      --panel: #15202b;
+      --text: #ffffff;
+      --muted: #b8c5d1;
+      --valorant: #ff4655;
+      --valorant-dim: #c93542;
+      --radius: 4px;
+      --font: "Rajdhani", "Segoe UI", system-ui, -apple-system, sans-serif;
     }
 
     * {
@@ -27,16 +27,7 @@
     html {
       min-height: 100%;
       min-height: 100dvh;
-      /* 纵向长屏下渐变过渡更柔和 */
-      background: linear-gradient(
-        165deg,
-        #e8eaf2 0%,
-        #f2f3f8 28%,
-        #f5f5f7 55%,
-        #eceef6 100%
-      );
-      background-attachment: fixed;
-      background-size: 100% 100%;
+      background: var(--bg);
     }
 
     body {
@@ -45,6 +36,7 @@
       min-height: 100dvh;
       font-family: var(--font);
       color: var(--text);
+      background: radial-gradient(120% 80% at 50% 0%, #1a2836 0%, var(--bg) 55%);
       -webkit-font-smoothing: antialiased;
       -webkit-tap-highlight-color: transparent;
     }
@@ -53,23 +45,41 @@
       width: 100%;
       max-width: 480px;
       margin: 0 auto;
-      padding: 48px max(20px, env(safe-area-inset-right)) 80px max(20px, env(safe-area-inset-left));
+      padding: 48px max(20px, env(safe-area-inset-right)) 88px max(20px, env(safe-area-inset-left));
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .crosshair {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      color: var(--valorant);
+      filter: drop-shadow(0 0 8px rgba(255, 70, 85, 0.45));
     }
 
     h1 {
-      font-size: 28px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin: 0 0 8px;
-      text-align: center;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 0;
+      line-height: 1.1;
     }
 
     .subtitle {
-      font-size: 15px;
-      color: var(--text-secondary);
+      font-size: 0.95rem;
+      color: var(--muted);
       text-align: center;
-      margin: 0 0 32px;
-      font-weight: 400;
+      margin: 0 0 28px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
     }
 
     .composer {
@@ -80,27 +90,28 @@
 
     textarea {
       width: 100%;
-      min-height: 108px;
-      padding: 16px 18px;
-      border: none;
+      min-height: 112px;
+      padding: 16px 16px;
+      border: 1px solid rgba(255, 70, 85, 0.25);
       border-radius: var(--radius);
-      background: var(--card);
-      box-shadow: var(--shadow);
+      background: rgba(15, 25, 35, 0.85);
       font-family: inherit;
       font-size: 17px;
+      font-weight: 500;
       line-height: 1.45;
       color: var(--text);
       resize: none;
       outline: none;
-      transition: box-shadow 0.2s ease;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     textarea::placeholder {
-      color: #aeaeb2;
+      color: rgba(184, 197, 209, 0.55);
     }
 
     textarea:focus {
-      box-shadow: var(--shadow-focus);
+      border-color: rgba(255, 70, 85, 0.65);
+      box-shadow: 0 0 0 1px rgba(255, 70, 85, 0.35), 0 0 24px rgba(255, 70, 85, 0.12);
     }
 
     .btn {
@@ -108,23 +119,27 @@
       padding: 14px 20px;
       min-height: 48px;
       border: none;
-      border-radius: 980px;
-      background: var(--accent);
+      border-radius: var(--radius);
+      background: var(--valorant);
       color: #fff;
-      font-size: 17px;
-      font-weight: 500;
+      font-size: 1.05rem;
+      font-weight: 700;
       font-family: inherit;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       cursor: pointer;
       transition: background 0.15s ease, transform 0.14s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       touch-action: manipulation;
+      box-shadow: 0 4px 0 #8b1f28, 0 8px 24px rgba(255, 70, 85, 0.25);
     }
 
     .btn:hover:not(:disabled) {
-      background: var(--accent-hover);
+      background: #ff5e6a;
     }
 
     .btn:active:not(:disabled) {
-      transform: scale(0.965);
+      transform: translateY(2px) scale(0.98);
+      box-shadow: 0 2px 0 #8b1f28, 0 4px 16px rgba(255, 70, 85, 0.2);
     }
 
     .btn:disabled {
@@ -133,27 +148,47 @@
     }
 
     .list {
-      margin-top: 36px;
+      margin-top: 32px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
     }
 
     .card {
       position: relative;
-      background: var(--card);
+      background: var(--panel);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 20px 18px 16px;
-      animation: cardIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      padding: 20px 16px 16px;
       opacity: 0;
       transform: translateY(12px);
+      border: 1px solid rgba(255, 70, 85, 0.22);
+      box-shadow:
+        0 0 0 1px rgba(255, 70, 85, 0.08) inset,
+        0 12px 40px rgba(0, 0, 0, 0.35);
+      animation:
+        cardIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+        borderPulse 2.8s ease-in-out 0.45s infinite;
     }
 
     @keyframes cardIn {
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    @keyframes borderPulse {
+      0%, 100% {
+        box-shadow:
+          0 0 0 1px rgba(255, 70, 85, 0.12) inset,
+          0 0 12px rgba(255, 70, 85, 0.08),
+          0 12px 40px rgba(0, 0, 0, 0.35);
+      }
+      50% {
+        box-shadow:
+          0 0 0 1px rgba(255, 70, 85, 0.35) inset,
+          0 0 22px rgba(255, 70, 85, 0.22),
+          0 12px 40px rgba(0, 0, 0, 0.35);
       }
     }
 
@@ -166,24 +201,27 @@
       position: absolute;
       top: 10px;
       right: 10px;
-      padding: 6px 10px;
+      padding: 8px 12px;
       min-height: 36px;
-      min-width: 52px;
-      border: none;
-      border-radius: 8px;
-      background: rgba(0, 0, 0, 0.04);
-      color: var(--text-secondary);
-      font-size: 13px;
+      min-width: 56px;
+      border: 1px solid rgba(255, 70, 85, 0.35);
+      border-radius: 2px;
+      background: rgba(15, 25, 35, 0.65);
+      color: var(--muted);
+      font-size: 0.75rem;
       font-family: inherit;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       cursor: pointer;
       opacity: 0;
-      transition: opacity 0.2s ease, background 0.15s ease, color 0.15s ease, transform 0.12s ease;
+      transition: opacity 0.2s ease, color 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
       touch-action: manipulation;
     }
 
     .del:hover {
-      background: rgba(0, 0, 0, 0.08);
       color: var(--text);
+      border-color: rgba(255, 70, 85, 0.65);
     }
 
     .del:active {
@@ -193,22 +231,24 @@
     .mood-body {
       font-size: 17px;
       line-height: 1.5;
+      font-weight: 600;
       word-break: break-word;
-      padding-right: 56px;
+      padding-right: 64px;
+      letter-spacing: 0.02em;
     }
 
     .ai-block {
       margin-top: 14px;
       padding-top: 14px;
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       min-height: 28px;
     }
 
     .ai-loading {
-      font-size: 15px;
-      color: var(--text-secondary);
-      font-style: normal;
-      letter-spacing: 0.01em;
+      font-size: 0.95rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      font-weight: 600;
       animation: pulse 1.4s ease-in-out infinite;
     }
 
@@ -218,128 +258,106 @@
     }
 
     .ai-reply {
-      font-size: 15px;
+      font-size: 0.98rem;
       line-height: 1.55;
       color: var(--text);
-      font-weight: 450;
-    }
-
-    .ai-reply.tone-comfort {
-      color: #64b5f6;
-    }
-
-    .ai-reply.tone-celebrate {
-      color: #ff9500;
-    }
-
-    .ai-reply.tone-career {
-      color: #ffd60a;
-    }
-
-    .ai-reply.tone-neutral {
-      color: var(--text);
+      font-weight: 600;
+      letter-spacing: 0.04em;
     }
 
     .meta {
       margin-top: 12px;
-      font-size: 13px;
-      color: var(--text-secondary);
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
     .empty {
       text-align: center;
-      color: var(--text-secondary);
-      font-size: 15px;
-      padding: 32px 16px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 36px 16px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
     }
 
-    /* —— 手机端：≤768px —— */
     @media (max-width: 767.98px) {
       .wrap {
         width: 95%;
         max-width: none;
         padding-top: max(28px, env(safe-area-inset-top));
-        padding-bottom: max(64px, env(safe-area-inset-bottom));
+        padding-bottom: max(72px, env(safe-area-inset-bottom));
+      }
+
+      .brand {
+        gap: 10px;
+      }
+
+      .crosshair {
+        width: 32px;
+        height: 32px;
       }
 
       h1 {
-        font-size: 22px;
-        line-height: 1.25;
-        margin-bottom: 6px;
+        font-size: 1.35rem;
+        letter-spacing: 0.1em;
       }
 
       .subtitle {
-        font-size: 16px;
-        margin-bottom: 24px;
-        line-height: 1.45;
+        font-size: 1rem;
+        margin-bottom: 22px;
       }
 
       textarea {
         font-size: 18px;
-        min-height: 120px;
-        padding: 18px 16px;
+        min-height: 124px;
+        padding: 18px 14px;
       }
 
       .btn {
-        font-size: 18px;
-        font-weight: 600;
+        font-size: 1.08rem;
         min-height: 52px;
-        padding: 16px 22px;
-      }
-
-      .btn:active:not(:disabled) {
-        transform: scale(0.96);
+        padding: 16px 20px;
       }
 
       .composer {
         gap: 16px;
       }
 
-      .list {
-        margin-top: 28px;
-        gap: 16px;
-      }
-
-      .card {
-        padding: 22px 16px 18px;
-      }
-
       .mood-body {
         font-size: 18px;
-        padding-right: 64px;
       }
 
       .ai-loading,
       .ai-reply {
-        font-size: 16px;
+        font-size: 1rem;
       }
 
-      .meta {
-        font-size: 14px;
-      }
-
-      .empty {
-        font-size: 16px;
-      }
-
-      /* 触摸设备：删除按钮常驻可见，避免「找不到删除」 */
       .del {
         opacity: 1;
-        font-size: 14px;
+        font-size: 0.78rem;
         min-height: 40px;
-        padding: 8px 12px;
       }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>My Mood Board</h1>
-    <p class="subtitle">写下此刻，随机遇见一句回应</p>
+    <div class="brand">
+      <svg class="crosshair" viewBox="0 0 48 48" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"/>
+        <circle cx="24" cy="24" r="3.5" fill="currentColor"/>
+        <path d="M24 6v8M24 34v8M6 24h8M34 24h8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+      </svg>
+      <h1>战术情绪板</h1>
+    </div>
+    <p class="subtitle">COMMS LOG · 写下状态，同步战术回应</p>
 
     <form class="composer" id="moodForm" autocomplete="off">
-      <textarea id="moodInput" maxlength="500" rows="4" placeholder="今天心情如何？" aria-label="心情输入" enterkeyhint="send"></textarea>
-      <button type="submit" class="btn" id="postBtn">发布</button>
+      <textarea id="moodInput" maxlength="500" rows="4" placeholder="报点：今天手感如何？" aria-label="心情输入" enterkeyhint="send"></textarea>
+      <button type="submit" class="btn" id="postBtn">发送战术通讯</button>
     </form>
 
     <div class="list" id="moodList" aria-live="polite"></div>
@@ -349,116 +367,50 @@
     (function () {
       'use strict';
 
-      var STORAGE_KEY = 'moodboard_entries_v1';
+      var STORAGE_KEY = 'moodboard_valorant_v1';
       var LOADING_PHASE2_MS = 800;
       var LOADING_DONE_MS = 1500;
 
-      var MSG_ANALYZE = '✨ 正在分析你的情绪...';
-      var MSG_UNIVERSE = '🔮 正在向宇宙请求建议...';
+      var MSG_ANALYZE = '◎ 正在同步战术频道...';
+      var MSG_UNIVERSE = '◆ 正在读取雷达情报...';
 
-      var NEGATIVE_KEYS = [
-        '累',
-        '加班',
-        '哭',
-        '难受',
-        '丧',
-        '烦',
-        '煩',
-        '抑郁',
-        '崩溃',
-        '压力',
-        '难过',
-        '痛苦',
-        '绝望',
-        '委屈',
-        '焦虑',
-        '心碎',
-        '郁闷',
+      var REPLY_TILT = '别破防，下把起个大狙守点，咱们一波 Clutch 回来！';
+      var REPLY_WIN = '这就是我们的 Match MVP！直接公屏输入：GGWP！';
+      var REPLY_ECO = '这波是 Eco 局，稳住心态，今晚下班回瓦，我给你打闪！';
+      var REPLY_TAC_SENSE = '心法别靠玄学，靠「战术直觉」：先听信息再出手，这回合你能 Read 到对面。';
+
+      var KEY_TILT = ['输了', '掉分', '坑'];
+      var KEY_WIN = ['赢了', '带飞', 'MVP', 'mvp'];
+      var KEY_ECO = ['加班', '累'];
+      var KEY_TAC = ['心法', '玄学'];
+
+      var DEFAULT_COMMS = [
+        '默认别慌：先清点道具，再谈枪法——战术直觉比运气准。',
+        '这回合当 Retake，补位慢一点，别给对面 Timing。',
+        '生活也是 Bo3：输一图不算输，调整经济下一分拿下。',
+        '听脚步、看小地图，情绪也要「报点」，别闷头硬冲。',
+        '今晚回瓦起半甲全道具，现实里先喝水再起立。',
+        '别迷信单点玄学，团队交叉火力才是版本答案。',
       ];
 
-      var POSITIVE_KEYS = [
-        '开心',
-        '中奖',
-        '爽',
-        '好玩',
-        '高兴',
-        '快乐',
-        '棒',
-        '赞',
-        '太好了',
-        '哈哈',
-        '耶',
-        '幸福',
-        '惊喜',
-      ];
-
-      var CAREER_KEYS = ['面试', '找工作', 'offer', '简历', '入职', '辞职', '跳槽', '职场', '薪资', '裁员'];
-
-      var REPLIES_COMFORT = [
-        '先深呼吸三次，你已经撑很久了，真的很不容易。',
-        '难过的时候不必逞强，今晚允许自己早点休息。',
-        '情绪没有对错，你只是需要被温柔接住而已。',
-        '把肩膀放松一点，世界不会因为你慢半拍就塌下来。',
-        '我在这儿听着呢，慢慢来，不着急。',
-        '给自己倒杯热水，像照顾好朋友那样照顾自己。',
-      ];
-
-      var REPLIES_CELEBRATE = [
-        '这股能量太顶了！趁热打铁，把开心存进回忆里！',
-        '值得庆祝！今天你就是自己的 MVP！',
-        '好运是努力的利息，你刚才那一下帅爆了！',
-        '把这份爽感截图存档，下次低潮时拿出来回血！',
-        '开心要大声说出来，宇宙都收到你的信号了！',
-        '继续保持，下一段高光正在路上冲过来！',
-      ];
-
-      var REPLIES_CAREER = [
-        '锦鲤附体，面试与 offer 都在向你靠拢，稳住节奏。',
-        '简历已投递宇宙 HR，下一封邮件可能是好消息。',
-        '跳槽不是逃跑，是升级地图，你值得更好的副本。',
-        '谈薪时记得微笑，你的价值不止一个数字。',
-        '职场如排位，先稳住心态，再秀操作。',
-        'offer 在路上堵车了，但导航显示终点是你。',
-      ];
-
-      var REPLIES_NEUTRAL = [
-        '日子像河流，不必急着靠岸，漂着也有风景。',
-        '今天没有标准答案，你写下的就是版本更新说明。',
-        '小事认真，大事随缘，心会轻一点。',
-        '把「以后再说」换成「现在一点点」，就够了。',
-        '世界很吵，你听见自己的声音就好。',
-        '不必解释太多，沉默里也能长出答案。',
-      ];
-
-      function detectTone(text) {
-        var s = String(text);
-        var lower = s.toLowerCase();
+      function containsAny(hay, needles) {
+        var s = String(hay);
         var i;
-        for (i = 0; i < NEGATIVE_KEYS.length; i++) {
-          if (s.indexOf(NEGATIVE_KEYS[i]) !== -1) return 'comfort';
+        for (i = 0; i < needles.length; i++) {
+          if (s.indexOf(needles[i]) !== -1) return true;
         }
-        for (i = 0; i < POSITIVE_KEYS.length; i++) {
-          if (s.indexOf(POSITIVE_KEYS[i]) !== -1) return 'celebrate';
-        }
-        for (i = 0; i < CAREER_KEYS.length; i++) {
-          if (s.indexOf(CAREER_KEYS[i]) !== -1) return 'career';
-        }
-        if (lower.indexOf('offer') !== -1) return 'career';
-        return 'neutral';
+        return false;
       }
 
-      function pickReplyByTone(tone) {
-        var pool;
-        if (tone === 'comfort') pool = REPLIES_COMFORT;
-        else if (tone === 'celebrate') pool = REPLIES_CELEBRATE;
-        else if (tone === 'career') pool = REPLIES_CAREER;
-        else pool = REPLIES_NEUTRAL;
-        return pool[Math.floor(Math.random() * pool.length)];
-      }
-
-      function resolveToneForEntry(item) {
-        if (item.tone) return item.tone;
-        return detectTone(item.text);
+      function pickComms(text) {
+        if (containsAny(text, KEY_TILT)) return { reply: REPLY_TILT, variant: 'tilt' };
+        if (containsAny(text, KEY_WIN)) return { reply: REPLY_WIN, variant: 'mvp' };
+        if (containsAny(text, KEY_ECO)) return { reply: REPLY_ECO, variant: 'eco' };
+        if (containsAny(text, KEY_TAC)) return { reply: REPLY_TAC_SENSE, variant: 'tacsense' };
+        return {
+          reply: DEFAULT_COMMS[Math.floor(Math.random() * DEFAULT_COMMS.length)],
+          variant: 'default',
+        };
       }
 
       function relativeTime(iso) {
@@ -539,9 +491,9 @@
           var idx = findIndexById(entryId);
           if (idx === -1) return;
           if (entries[idx].aiReply != null) return;
-          var tone = resolveToneForEntry(entries[idx]);
-          entries[idx].tone = tone;
-          entries[idx].aiReply = pickReplyByTone(tone);
+          var comms = pickComms(entries[idx].text);
+          entries[idx].variant = comms.variant;
+          entries[idx].aiReply = comms.reply;
           saveEntries(entries);
           render();
           afterRender();
@@ -563,7 +515,7 @@
         if (entries.length === 0) {
           var empty = document.createElement('div');
           empty.className = 'empty';
-          empty.textContent = '还没有心情，写一条试试吧';
+          empty.textContent = '暂无通讯记录 · 来一发战术广播';
           moodList.appendChild(empty);
           return;
         }
@@ -606,8 +558,7 @@
             aiBlock.appendChild(loading);
           } else {
             var reply = document.createElement('div');
-            var toneClass = resolveToneForEntry(item);
-            reply.className = 'ai-reply tone-' + toneClass;
+            reply.className = 'ai-reply';
             reply.textContent = item.aiReply;
             aiBlock.appendChild(reply);
           }
@@ -630,7 +581,6 @@
           text: text,
           createdAt: new Date().toISOString(),
           aiReply: null,
-          tone: detectTone(text),
         };
         entries.unshift(entry);
         saveEntries(entries);
